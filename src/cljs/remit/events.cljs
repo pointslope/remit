@@ -100,13 +100,12 @@
   ([pub-chan sub-chan event-key f]
    (let [_ (sub pub-chan event-key sub-chan)]
      (go-loop []
-       (let [event (<! sub-chan)]
-         (when event
-           (try
-             (f (:data event))
-             (catch :default e
-               (warn e)))
-           (recur))))
+       (when-let [event (<! sub-chan)]
+         (try
+           (f event)
+           (catch :default e
+             (warn e)))
+         (recur)))
      sub-chan)))
 
 (defn unsubscribe
