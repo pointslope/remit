@@ -1,19 +1,52 @@
 # Remit
 
-A tiny ClojureScript event-handling library using core.async
+A tiny (experimental) ClojureScript event-handling library using core.async
 
-## Use It
+## Getting It
+
+remit is available on Clojars:
 
 [![Clojars Project](http://clojars.org/pointslope/remit/latest-version.svg)](http://clojars.org/pointslope/remit)
 
-## Purpose
+## Motivation
 
-We like reframe's approach to building ClojureScript SPAs using Reagent. In particular, we love the idea of the unidirectional reactive loop. Like the author, we have found that emitting events and having them handle state changes simplifies code quite a bit. This project takes a slightly different approach to central event dispatch, however:
+We like [reframe's](https://github.com/Day8/re-frame) approach to building ClojureScript SPAs using Reagent. In particular, we love the idea of the unidirectional reactive loop. Like reframe's author, we have found that emitting events and having them handle state changes makes it easier to reason about our code. This project takes a slightly different approach to the central event dispatch, however:
 
-* core.async channels are used for event pub/sub
-we feel that this provides for greater flexibility (e.g. multiple handlers for a single event, dynamic event un/subscription)
+* events are maps
 
-TODO: more info
+when you **emit** an event, we create a map containing two keys `:event` and `:data`.
+the `:event` key specifies the name of the event passed as the first argument to emit.
+the `:data` key contains any (optional) data you might have passed as the second argument
+to emit.
+
+* event maps are published onto core.async channels using pub/sub
+
+we feel that this provides for greater flexibility by allowing multiple event handlers for a single event, and dynamic event un/subscription.
+
+* emit/subscribe don't know about your app-db
+
+we didn't feel it was appropriate for an event library to manage your state atom.
+we did, however, ship an **event-map-middleware** which makes it easy for you to
+add your app-db atom to the event map (much the way we do in Ring apps).
+
+```clojure
+
+;;; Write something like this...
+(defn wrap-db
+  "Adds the app-db to the event map under the :db key"
+  [handler]
+  (-> handler
+    (event-map-middleware :db app-db)))
+
+(subscribe :missiles-launched
+           (wrap-db
+             (fn [{db :db {num :icbms} :data}]
+               (swap! db #(update-in % [:missiles] (partial + num))))))
+```
+
+## Maturity
+
+This is a *very* young project that we are using to vet out our ideas about developing SPAs with [reagent](https://github.com/reagent-project/reagent). It has not been significantly battle tested, blah, blah, blah. Oh, what the hell&mdash;just go ahead and try it out. The whole library is under 150 lines of code including docstrings. If you encounter a bug, please open an issue (or better yet submit a pull request) and we'll get right to fixing it.
 
 ## Copyright
 
