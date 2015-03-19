@@ -1,4 +1,4 @@
-(ns remit.events
+(ns pointslope.remit.events
   "This namespace contains three functions: emit, 
   subscribe, and unsubscribe. These functions 
   implement message routing via core.async pub/sub.

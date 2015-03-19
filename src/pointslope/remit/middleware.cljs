@@ -1,4 +1,4 @@
-(ns remit.middleware
+(ns pointslope.remit.middleware
   "This namespace contains common and reusable middleware
 used in event processing.")
 
