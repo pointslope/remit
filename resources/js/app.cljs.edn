@@ -1,2 +1,0 @@
-{:require  [remit.app]
- :init-fns [remit.app/init]}

@@ -6,7 +6,8 @@
                  [adzerk/boot-reload    "0.2.6"          :scope "test"]
                  [pandeiro/boot-http    "0.6.3-SNAPSHOT" :scope "test"]
                  [adzerk/bootlaces      "0.1.11"         :scope "test"]
-                 [reagent "0.5.0"]])
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 [reagent "0.5.0" :exclusions [org.clojure/clojure org.clojure/clojurescript]]])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
@@ -25,35 +26,3 @@
       :url "https://github.com/pointslope/remit"
       :scm {:url "https://github.com/pointslope/remit"}
       :license {"Eclipse Public License" "http://www.eclipse.org/legal/epl-v10.html"}})
-
-(deftask build []
-  (comp (speak :theme "woodblock")
-        (cljs)))
-
-(deftask run []
-  (comp (serve)
-        (watch)
-        (cljs-repl)
-        (reload)
-        (build)))
-
-(deftask production []
-  (task-options! cljs {:optimizations :advanced
-                       ;; pseudo-names true is currently required
-                       ;; https://github.com/martinklepsch/pseudo-names-error
-                       ;; hopefully fixed soon
-                       :pseudo-names true})
-  identity)
-
-(deftask development []
-  (task-options! cljs {:optimizations :none
-                       :unified-mode true
-                       :source-map true}
-                 reload {:on-jsload 'remit.app/init})
-  identity)
-
-(deftask dev
-  "Simple alias to run application in development mode"
-  []
-  (comp (development)
-        (run)))
