@@ -12,7 +12,7 @@ used in event processing.")
 
 ;; - predefined middleware -
 
-(defn event-data-middleware
+(defn event-map-middleware
   "A middleware function to assoc a given 
   key/value pair onto every event prior
   to delegating the call to the supplied
