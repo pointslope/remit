@@ -2,6 +2,10 @@
 
 A tiny ClojureScript event-handling library using core.async
 
+## Use It
+
+[![Clojars Project](http://clojars.org/pointslope/remit/latest-version.svg)](http://clojars.org/pointslope/remit)
+
 ## Purpose
 
 We like reframe's approach to building ClojureScript SPAs using Reagent. In particular, we love the idea of the unidirectional reactive loop. Like the author, we have found that emitting events and having them handle state changes simplifies code quite a bit. This project takes a slightly different approach to central event dispatch, however:
