@@ -1,28 +1,19 @@
 (ns pointslope.remit.events
-  "This namespace contains three functions: emit, 
-  subscribe, and unsubscribe. These functions 
-  implement message routing via core.async pub/sub.
-  Differences from re-frame:
+  "This namespace contains functions dealing with
+  the publishing and subscription of events. 
 
-  - instead of a single go routine, we have a go
-  routine per event handler. 
+  Events are maps containing an :event key which
+  is used as a core.async pub/sub topic.
 
-  - the handle function is conceptually rolled 
-  into the same go routine
-
-  - keeping track of event handler subscriptions
-  explicitly via an atom is no longer needed
-  
-  - we have not ported middleware 
-
-  - we have not ported the event metadata dom flushing"
+  Any data emitted with the event is stored under
+  the :data key of the same event map."
   (:require [reagent.core :as reagent :refer [atom]]           
             [cljs.core.async :as async
              :refer [<! >! chan close! put! pub sub unsub unsub-all]])
   (:require-macros [cljs.core.async.macros :as m :refer [go go-loop alt!]]
                    [reagent.debug :refer [log prn warn]]))
 
-;; --- core.async pub/sub channels for events ---
+;; --- core.async pub/sub channels for emitting events ---
 
 (def ^:private event-channel
   "This channel is used by the emit function
@@ -64,14 +55,15 @@
 ;; --- event subscription ---
 
 (defn subscribe
-  "This function registers an event sink for
-  a given topic. It does this by establishing
+  "This function registers a handler function for
+  a given event (topic). It does this by establishing
   a core.async subscription on a new channel.
 
-  Expects an event-key and handler function.
+  Expects an event key and handler function.
   Optionally, a pre-existing subscription
   channel can be passed in. This makes it 
-  easy to re-connect a listener dynamically.
+  easy to re-connect a previous listener 
+  dynamically.
 
   If no subscription channel is supplied, a
   new one will be created.
@@ -80,8 +72,11 @@
   can later be used to unsubscribe.
 
   Received events will be delegated to the 
-  supplied function in a go loop. The go-loop
-  will exit if the channel is closed.
+  supplied function in a go block. The go
+  block will exit if the channel is closed.
+
+  In the event of an exception, we will warn 
+  on the js/console and re-throw.
 
   usage:
 
@@ -104,12 +99,13 @@
          (try
            (f event)
            (catch :default e
-             (warn e)))
+             (warn e)
+             (throw e)))
          (recur)))
      sub-chan)))
 
 (defn unsubscribe
-  "Unsubscribes a channel from an event publication. "
+  "Unsubscribes a channel from an event publication"
   ([sub-chan topic]
    (unsubscribe event-publication sub-chan topic))
 

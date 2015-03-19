@@ -1,14 +1,13 @@
 (ns pointslope.remit.middleware
-  "This namespace contains common and reusable middleware
-used in event processing.")
+  "This namespace contains reusable middleware
+factories that can assist with event processing.")
 
 ;;; - handler design -
-;;; Remit event handlers are expected to be functions
+;;; remit event handlers are expected to be functions
 ;;; that take a single event map parameter and pull the
 ;;; data they need from its keys.
-;;; Event maps are guaranteed to have to two members/keys:
-;;; :event containing the name of the event that was emitted
-;;; :data containing any additional data (or nil) emitted with the event
+;;;
+;;; See the pointslope.remit.events namespace for details.
 
 ;; - predefined middleware -
 
