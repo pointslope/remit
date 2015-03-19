@@ -18,7 +18,7 @@
   - we have not ported the event metadata dom flushing"
   (:require [reagent.core :as reagent :refer [atom]]           
             [cljs.core.async :as async
-             :refer [<! >! chan close! put! pub sub unsub]])
+             :refer [<! >! chan close! put! pub sub unsub unsub-all]])
   (:require-macros [cljs.core.async.macros :as m :refer [go go-loop alt!]]
                    [reagent.debug :refer [log prn warn]]))
 
@@ -115,3 +115,11 @@
 
   ([pub-chan sub-chan topic]
    (unsub pub-chan topic sub-chan)))
+
+(defn unsubscribe-all
+  "Unsubscribes all listeners from an event topic"
+  ([topic]
+   (unsubscribe-all event-publication topic))
+  
+  ([pub-chan topic]
+   (unsub pub-chan topic)))
