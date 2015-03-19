@@ -44,7 +44,7 @@ add your app-db atom to the event map (much the way we do in Ring apps).
                (swap! db #(update-in % [:missiles] (partial + num))))))
 ```
 
-### Why handle things in the DOM event handlers?
+### Why not simply use DOM event handlers?
 
 DOM events like `:on-click` live at a different level of abstraction. They are passed a browser-oriented event object (React synthetic event to be precise). By defining events that are application-centric instead of browser-centric, we force the DOM event handler to parse out and repackage information using keys that make more sense to the application domain. Also, it helps us resist the temptation to push logic that changes *application state* inside of our view components. Component-local state can and should still be managed by the components, but not app state. We can also have several browser events emit the same application event. For instance, both an `:on-click` and `:key-down` could emit a `:missiles-launched` event.
 
