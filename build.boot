@@ -21,9 +21,9 @@
 (task-options!
  pom {:project  'pointslope/remit
       :version +version+
-      :description "A tiny event-handling pattern built on core.async"
-      :url "https://bitbucket.org/pointslope/remit"
-      :scm {:url "https://bitbucket.org/pointslope/remit"}
+      :description "A tiny (experimental) event-handling library built on core.async"
+      :url "https://github.com/pointslope/remit"
+      :scm {:url "https://github.com/pointslope/remit"}
       :license {"Eclipse Public License" "http://www.eclipse.org/legal/epl-v10.html"}})
 
 (deftask build []
