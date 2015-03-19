@@ -122,4 +122,4 @@
    (unsubscribe-all event-publication topic))
   
   ([pub-chan topic]
-   (unsub pub-chan topic)))
+   (unsub-all pub-chan topic)))
