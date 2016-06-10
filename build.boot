@@ -1,6 +1,10 @@
 (set-env!
  :source-paths    #{"src"}
  :resource-paths  #{"resources"}
+ :repositories    [["clojars" {:url "https://clojars.org/repo/"
+                               :username (System/getenv "CLOJARS_USER")
+                               :password (System/getenv "CLOJARS_PASS")}]
+                   ["central" {:url "http://repo1.maven.org/maven2/"}]]
  :dependencies '[[adzerk/boot-cljs      "1.7.228-1" :scope "test"]
                  [adzerk/boot-cljs-repl "0.3.0"     :scope "test"]
                  [adzerk/boot-reload    "0.4.8"     :scope "test"]
