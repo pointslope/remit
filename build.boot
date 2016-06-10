@@ -1,13 +1,12 @@
 (set-env!
  :source-paths    #{"src"}
  :resource-paths  #{"resources"}
- :dependencies '[[adzerk/boot-cljs      "0.0-2814-3"     :scope "test"]
-                 [adzerk/boot-cljs-repl "0.1.9"          :scope "test"]
-                 [adzerk/boot-reload    "0.2.6"          :scope "test"]
-                 [pandeiro/boot-http    "0.6.3-SNAPSHOT" :scope "test"]
-                 [adzerk/bootlaces      "0.1.11"         :scope "test"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                 [reagent "0.5.0" :exclusions [org.clojure/clojure org.clojure/clojurescript]]])
+ :dependencies '[[adzerk/boot-cljs      "1.7.228-1" :scope "test"]
+                 [adzerk/boot-cljs-repl "0.3.0"     :scope "test"]
+                 [adzerk/boot-reload    "0.4.8"     :scope "test"]
+                 [pandeiro/boot-http    "0.7.3"     :scope "test"]
+                 [adzerk/bootlaces      "0.1.13"    :scope "test"]
+                 [org.clojure/core.async "0.2.374" ]])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
@@ -16,7 +15,7 @@
  '[pandeiro.boot-http    :refer [serve]]
  '[adzerk.bootlaces      :refer :all])
 
-(def +version+ "0.1.0-SNAPSHOT")
+(def +version+ "0.2.0-SNAPSHOT")
 (bootlaces! +version+)
 
 (task-options!
