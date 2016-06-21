@@ -1,4 +1,4 @@
-(defproject pointslope/remit "0.2.0"
+(defproject pointslope/remit "0.2.1-SNAPSHOT"
   :description "A tiny event pub/sub library built on core.async"
   :url "https://github.com/pointslope/remit"
   :license {:name "Eclipse Public License"
@@ -11,4 +11,3 @@
   :deploy-repositories [["releases" :clojars]]
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
-
