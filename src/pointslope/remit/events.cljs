@@ -51,7 +51,7 @@
 (defn un-pubsub
   "Tears down the tap setup by pubsub"
   []
-  (tap event-multiplexer publication-sink))
+  (untap event-multiplexer publication-sink))
 
 (defn wiretap
   "Creates a new channel that taps into the 
