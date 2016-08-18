@@ -6,7 +6,7 @@ A tiny Clojure / ClojureScript event-handling library using core.async
 
 remit is available on Clojars:
 
-[![Clojars Project](http://clojars.org/pointslope/remit/latest-version.svg)](http://clojars.org/pointslope/remit)
+[![Clojars Project](https://img.shields.io/clojars/v/pointslope/remit.svg)](https://clojars.org/pointslope/remit)
 
 ## Motivation
 
