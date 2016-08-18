@@ -1,6 +1,6 @@
 # Remit
 
-A tiny (experimental) ClojureScript event-handling library using core.async
+A tiny Clojure / ClojureScript event-handling library using core.async
 
 ## Getting It
 
@@ -54,7 +54,7 @@ This is a *very* young project that we are using to vet out our ideas about deve
 
 ## Copyright
 
-Copyright 2015 Point Slope, LLC
+Copyright 2015-2016 Point Slope, LLC
 
 Licensed under the terms of the [Eclipse Public License](https://www.eclipse.org/legal/epl-v10.html)
 (same as Clojure & ClojureScript)

@@ -1,8 +1,9 @@
 
-0.2.1 / 2016-08-18
+0.3.0 / 2016-08-18
 ==================
 
-  * Fixed bug in un-pubsub wasn't working
+  * Convert to cljc for Clojure / Clojure Script
+  * Fixed bug where un-pubsub wasn't working
 
 0.2.0 / 2016-06-10
 ==================
